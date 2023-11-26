@@ -18,24 +18,24 @@ if (!function_exists('admin')):
 endif;
 
 if (!function_exists('getConfig')):
-    function getConfig(String $name): ?String{
-        $row = DB::table('website_configs')->select('value')->where('name', $name)->first();
+    function getConfig(String $key){
+        $row = DB::table('website_configs')->select('value')->where('key', $key)->first();
         if (is_null($row)) {
             return null;
         } else {
-            return $row->value;
+            return json_decode($row->value);
         }
         return null;
     }
 endif;
 
 if (!function_exists('setConfig')):
-    function setConfig(String $name, $value = null){
-        $row = DB::table('website_configs')->select('value')->where('name', $name)->first();
+    function setConfig(String $key, $value = null){
+        $row = DB::table('website_configs')->select('value')->where('key', $key)->first();
         if (is_null($row) OR $row == false) {
-            return DB::table('website_configs')->insert(['name' => $name, 'value' => $value]);
+            return DB::table('website_configs')->insert(['key' => $key, 'value' => $value]);
         } else {
-            return DB::table('website_configs')->where('name', $name)->update(['value' => $value]);
+            return DB::table('website_configs')->where('key', $key)->update(['value' => $value]);
         }
         return false;
     }
@@ -232,5 +232,23 @@ if(!function_exists('qrImage')):
         $val = urlencode($val); $ize = $ize.'x'.$ize;
         return "https://chart.googleapis.com/chart?chs=$ize&cht=qr&chl=$val";
     }
-
 endif;
+
+if(!function_exists('arrayToString')):
+    function arrayToString(array $arr, string $keys) {
+        $string = '';
+        foreach ($arr as $key => $value) {
+            $string .= $value[$keys] . ',';
+        }
+        return rtrim($string, ',');
+    }
+endif;
+
+if(!function_exists('arrayValueSearch')):
+    function arrayValueSearch(array $arr, string $keys, string $search) {
+        foreach ($arr as $k => $v) {
+            if ($v[$keys] == $search) return $v;
+        }
+    }
+endif;
+

@@ -7,21 +7,10 @@
 .divider {
     margin: 0!important;
 }
-
 </style>
 @endsection
 @section('content')
-<div class="row ">
-    <div class="col-md-4 mb-4">
-        <div class="card h-100">
-            <div class="card-header bg-primary py-3">
-                <h5 class="card-title  text-white fs-bold my-auto"><i class="tf-icons mdi mdi-bullhorn-outline"></i> Informasi !</h5>
-            </div>
-            <div class="card-body">
-
-            </div>
-        </div>
-    </div>
+<div class="row justify-content-center">
     <div class="col-md-8 mb-4">
         <div class="card mb-4">
             <div class="card-header bg-primary py-3">
@@ -43,14 +32,36 @@
                             <small class="text-danger email-invalid"></small>
                         </div>
                         <div class="form-group col-md-6 my-1">
-                            <label for="">Nama Lengkap </label>
-                            <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" placeholder="Nama Lengkap">
+                            <label for="">Nama Lengkap <em class="text-danger ms-2"> *harus sesuai dengan KTM</em></label>
+                            <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" placeholder="Nama lengkap">
                             <small class="text-danger name-invalid"></small>
                         </div>
                         <div class="form-group col-md-12 my-1">
+                            <label for="">NIM <em class="text-danger ms-2"> *harus sesuai dengan KTM</em></label>
+                            <input type="text" class="form-control" name="sid_number" id="sid_number" value="{{ old('sid_number') }}" placeholder="Nomor induk mahasiswa">
+                            <small class="text-danger sid_number-invalid"></small>
+                        </div>
+                        {{-- <div class="form-group col-md-12 my-1">
                             <label for="">Asal Institusi </label>
                             <input type="text" class="form-control" name="institutional_origin" id="institutional_origin" value="{{ old('institutional_origin') }}" placeholder="Asal Institusi">
                             <small class="text-danger institutional_origin-invalid"></small>
+                        </div> --}}
+                        <div class="form-group col-md-12 my-1">
+                            <label for="">Asal Institusi / Universitas </label>
+                            {{-- <select name="institutional_origin" id="institutional_origin" class="form-select select2"></select> --}}
+                            {{-- <input type="text" class="form-control" name="institutional_origin" id="institutional_origin" value="{{ old('institutional_origin') }}" placeholder="Asal Institusi"> --}}
+                            <select class="form-select" name="institutional_origin" id="institutional_origin">
+                                <option value="">Pilih salah satu</option>
+                                @foreach (config('constants.universities') as $key => $value)
+                                    <option value="{{ $value['id'] }}">{{ $value['name'] }}</option>
+                                @endforeach
+                            </select>
+                            <small class="text-danger institutional_origin-invalid"></small>
+                        </div>
+                        <div class="form-group col-md-12 my-1 d-none" id="form-institutional">
+                            <label for="">Nama Instansi / Universitas </label>
+                            <input type="text" class="form-control" name="institutional_name" id="institutional_name" value="{{ old('institutional_name') }}" placeholder="Contoh: STIKIP PGRI JOMBANG, STIKES, UNWAHA dsb">
+                            <small class="text-danger institutional_name-invalid"></small>
                         </div>
                         <div class="divider">
                             <div class="divider-text">
@@ -58,12 +69,23 @@
                             </div>
                         </div>
                         <div class="form-group col-md-12 my-1">
-                            <label for="">Atas Nama Pengirim dan Pembayaran</label>
+                            <label for="">Pembayaran</label>
+                            <select class="form-select" name="payment" id="payment">
+                                <option value="">Pilih salah satu</option>
+                                @foreach (config('constants.payments') as $key => $value)
+                                    <option value="{{ $value['name'] }}">{{  $value['name'] . ' ' . $value['account'] . ' - ' . $value['holder'] . ' - ' . ($value['is_manual'] == true ? 'Konfirmasi Manual' : 'Otomatis') }}</option>
+                                @endforeach
+                            </select>
+                            {{-- <input type="text" class="form-control" name="pay_sender" id="pay_sender" value="{{ old('pay_sender') }}" placeholder="Contoh: BRI 3171xxx, DANA 081xxx"> --}}
+                            <small class="text-danger payment-invalid"></small>
+                        </div>
+                        <div class="form-group col-md-12 my-1">
+                            <label for="">Atas Nama Pengirim </label>
                             <input type="text" class="form-control" name="pay_sender" id="pay_sender" value="{{ old('pay_sender') }}" placeholder="Contoh: BRI 3171xxx, DANA 081xxx">
                             <small class="text-danger pay_sender-invalid"></small>
                         </div>
                         <div class="form-group col-md-12 my-1">
-                            <label for="">Bukti Transfer </label>
+                            <label for="">Bukti Transfer <em class="text-danger">*Kosongkan jika belum melakukan transfer</em></label>
                             <input type="file" class="dropify" name="pay_proof" id="pay_proof" value="{{ old('pay_proof') }}" placeholder="Bukti Pembayaran">
                             <small class="text-danger pay_proof-invalid"></small>
                         </div>
@@ -72,11 +94,11 @@
                                 <h5 class="mt-2">Lainnya</h5>
                             </div>
                         </div>
-                        <div class="form-group col-md-12 my-1">
+                        {{-- <div class="form-group col-md-12 my-1">
                             <label for="">Bukti Follow Sosial Media </label>
                             <input type="file" class="form-control" name="follow_prof" id="follow_prof" value="{{ old('follow_prof') }}" placeholder="Asal Institusi">
                             <small class="text-danger follow_prof-invalid"></small>
-                        </div>
+                        </div> --}}
                         <div class="form-group col-md-12 my-1">
                             <label for="">Nomor Whatsapp </label>
                             <input type="number" class="form-control" name="whatsapp" id="whatsapp" value="{{ old('whatsapp') }}" placeholder="Contoh: 62814xxxxxxx">
@@ -106,9 +128,89 @@
             'error': 'Ooops, something wrong happended.'
         }
     });
+    $(document).ready(function () {
+        $('select[name="institutional_origin"]').change(function (e) {
+            e.preventDefault();
+            console.log($('select[name="institutional_origin"] option:selected').val());
+            if ($('select[name="institutional_origin"] option:selected').val() == '2') {
+                $('#form-institutional').removeClass('d-none');
+            } else {
+                $('#form-institutional').addClass('d-none');
+            }
+        });
+        $('.select2').select2({
+            placeholder: 'Pilih Institusi',
+            minimumInputLength: 2,
+            // ajax: {
+            //     url: '{{ route('universitas.searchGET') }}?__m=__searchInstitutional',
+            //     dataType: 'json',
+            //     delay: 500,
+            //     processResults: function (data) {
+            //         return {
+            //             results: data
+            //         };
+            //     },
+            //     cache: true
+            // }
+        });
+    });
 </script>
 <script>
-    requestSubmit('#register-form', '#register-form', 'button[type="submit"]', 'redirect', '{{ route('guest.seminar.registerGET') }}');
+    $(document).ready(function () {
+        $('#register-form').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                data: new FormData(this),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                beforeSend: function () {
+                    reset_button(0, 'button[type="submit"]');
+                    $(document).find('small.text-danger').text('');
+                    $(document).find('input').removeClass('is-invalid');
+                    swal.fire({
+                        title: 'Harap menunggu...',
+                        allowOutsideClick: false,
+                        didOpen: function () {
+                            swal.showLoading()
+                        }
+                    })
+                },
+                success: function (data) {
+                    reset_button(1, 'button[type="submit"]');
+                    if (data.status == false) {
+                        if (data.type == 'validation') {
+                            swal.close();
+                            $.each(data.msg, function (key, val) {
+                                $('input[name=' + key.replaceAll(".", "_") + ']').addClass('is-invalid');
+                                $('select[name=' + key.replaceAll(".", "_") + ']').addClass('is-invalid');
+                                $('select[name=' + key.replaceAll(".", "_") + ']').focus();
+                                // $("option").addClass('is-invalid').focus();
+                                $('textarea[name=' + key.replaceAll(".", "_") + ']').addClass('is-invalid');
+                                $('textarea[name=' + key.replaceAll(".", "_") + ']').addClass('is-invalid').focus();
+                                $('small.' + key.replaceAll(".", "_") + '-invalid').text(val[0]);
+                            });
+                        }
+                        if (data.type == 'alert') {
+                            swal.fire('Gagal!', data.msg, 'error');
+                        }
+                    } else {
+                        $('#register-form')[0].reset();
+                        swal.fire('Success!', data.msg, 'success');
+                        setInterval(function () {
+                            window.location = data.redirect_url;
+                        }, 1000);
+                    }
+                },
+                error: function () {
+                    reset_button(1, button);
+                    swal.fire("Fails!", "Terjadi kesalahan pada sistem!..", "error");
+                },
+            });
+        });
+    });
 </script>
 @endpush
 @endsection

@@ -10,10 +10,11 @@ class InvoiceController extends Controller
     public function index() {
         $components = [
             'page' => [
-                'title' => 'Cari Faktur',
+                'title' => (request()->segment(3) == null) ? 'Cari Faktur' : 'Faktur ' . request()->segment(3),
                 'subtitle' => 'Invoice for our seminar'
             ]
         ];
         return view('guest.seminar.invoice', $components);
     }
+
 }

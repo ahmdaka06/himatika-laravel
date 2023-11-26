@@ -31642,7 +31642,11 @@ a.bg-vimeo:focus {
   border-color: rgba(163, 164, 204, .15)
 }
 
+div:where(.swal2-container) {
+    z-index: 9999 !important;
+}
 .swal2-modal {
+    z-index: 9999;
     background-color: #111c44;
 }
 

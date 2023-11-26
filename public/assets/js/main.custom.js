@@ -76,7 +76,12 @@ function requestSubmit(modal = '#modal-form', element = '', button = 'button[typ
                         setInterval(function () {
                             window.location = redirect;
                         }, 1000);
-
+                    }
+                    if (type === 'r_redirect') {
+                        swal.fire('Success!', data.msg, 'success');
+                        setInterval(function () {
+                            window.location = data.redirect_url;
+                        }, 1000);
                     }
                 }
             },

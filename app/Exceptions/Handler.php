@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -26,5 +27,23 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if ($request->expectsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+
+
+        $guard = \Arr::get($exception->guards(), 0);
+
+        $route = 'user.auth.loginGET';
+
+        if ($guard == 'admin') {
+            $route = 'admin.auth.loginGET';
+        }
+
+        return redirect()->route($route)->with('error', 'Silahkan login terlebih dahulu!.');
     }
 }
