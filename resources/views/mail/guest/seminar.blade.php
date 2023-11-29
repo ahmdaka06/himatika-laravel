@@ -232,7 +232,7 @@
                                             <tr>
                                                 <td class="td-6">
                                                     <p class="p">
-                                                    - <b>No. Faktur:</b> {{ $id }}<br />
+                                                    - <b>No. Faktur:</b> {{ $invoice }}<br />
                                                     - <b>Tanggal:</b> {{ format_datetime($created_at) }}<br />
                                                     - <b>Nama:</b> {{ $name }}<br />
                                                     - <b>Asal Institusi:</b> {{ $institutional_origin['name'] }}<br />

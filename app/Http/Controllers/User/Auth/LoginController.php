@@ -51,9 +51,12 @@ class LoginController extends Controller
             ];
         }
 
-        return redirect()
-            ->route('user.dashboard.index')
-            ->with('success', 'Email atau password salah!');
+        return [
+            'status' => true,
+            'type' => 'alert',
+            'msg' => 'Login berhasil!',
+            'redirect_url' => route('user.dashboard.index')
+        ];
     }
 
     public function logout()
