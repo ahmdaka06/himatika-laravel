@@ -22,4 +22,14 @@ return [
         ['key' => 'success', 'name' => 'Sukses'],
         ['key' => 'aproved', 'name' => 'Pembayaran Diterima'],
     ],
+    'attendances' => [
+        'lists' => [
+            '1' => 'Hadir',
+            '2' => 'Tidak Hadir',
+        ],
+        'types' => [
+            '1' => 'Offline',
+            '2' => 'Online',
+        ],
+    ],
 ];

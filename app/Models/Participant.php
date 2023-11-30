@@ -21,6 +21,7 @@ class Participant extends Model
         'pay_sender',
         'pay_proof',
         'recom_by',
+        'attend',
         'price',
         'is_paid',
         'status',

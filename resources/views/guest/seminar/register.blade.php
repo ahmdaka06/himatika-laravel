@@ -104,6 +104,17 @@
                             <input type="text" class="form-control" name="recom_by" id="recom_by" value="{{ old('recom_by') }}" placeholder="Contoh: @himatika.undar, @mukhshlxxxx, Muhammad Abdullah">
                             <small class="text-danger recom_by-invalid"></small>
                         </div>
+                        <div class="form-group col-md-12 my-1">
+                            <label for="">Mengikuti Secara ?</label>
+                            <select class="form-select" name="attend" id="attend">
+                                <option value="">Pilih salah satu</option>
+                                @foreach (config('constants.attendances.types') as $key => $value)
+                                    <option value="{{ $key }}">{{  $value }}</option>
+                                @endforeach
+                            </select>
+                            {{-- <input type="text" class="form-control" name="pay_sender" id="pay_sender" value="{{ old('pay_sender') }}" placeholder="Contoh: BRI 3171xxx, DANA 081xxx"> --}}
+                            <small class="text-danger attend-invalid"></small>
+                        </div>
                         <div class="form group col-md-12 d-flex justify-content-center my-3">
                             <button type="submit" class="btn btn-primary"><i class="mdi mdi-check mx-2"></i> Submit</button>
                         </div>
@@ -165,6 +176,7 @@
                     reset_button(0, 'button[type="submit"]');
                     $(document).find('small.text-danger').text('');
                     $(document).find('input').removeClass('is-invalid');
+                    $(document).find('select').removeClass('is-invalid');
                     swal.fire({
                         title: 'Harap menunggu...',
                         allowOutsideClick: false,

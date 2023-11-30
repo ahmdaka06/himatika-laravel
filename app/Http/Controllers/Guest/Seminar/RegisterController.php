@@ -40,6 +40,7 @@ class RegisterController extends Controller
             'pay_sender' => 'required',
             'pay_proof' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5000',
             'recom_by' => 'nullable',
+            'attend' => 'required|in:1,2',
         ], [
             'whatsapp.phone_number' => 'Harus diawali dengan 62',
         ], [
@@ -53,6 +54,7 @@ class RegisterController extends Controller
             'pay_sender' => 'Nama Pengirim',
             'pay_proof' => 'Bukti Pembayaran',
             'recom_by' => 'Rekomendasi dari',
+            'attend' => 'Kehadiran',
         ]);
 
         if ($validators->fails()) {
@@ -73,6 +75,7 @@ class RegisterController extends Controller
             // 'payment' => $request->payment,
             'pay_sender' => $request->pay_sender,
             'recom_by' => $request->recom_by,
+            'attend' => $request->attend,
         ];
 
 
