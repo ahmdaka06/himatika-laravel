@@ -42,7 +42,7 @@ class RegisterController extends Controller
             'recom_by' => 'nullable',
             'attend' => 'required|in:1,2',
         ], [
-            'whatsapp.phone_number' => 'Harus diawali dengan 62',
+            'whatsapp.phone_number' => 'Harus diawali dengan 628',
         ], [
             'name' => 'Nama',
             'email' => 'Email',
@@ -69,7 +69,7 @@ class RegisterController extends Controller
             'invoice' => 'INV-' . time(),
             'name' => $request->name,
             'email' => $request->email,
-            'sid_number' => $request->sid_number,
+            // 'sid_number' => $request->sid_number,
             'institutional_origin' => null,
             'whatsapp' => $request->whatsapp,
             // 'payment' => $request->payment,

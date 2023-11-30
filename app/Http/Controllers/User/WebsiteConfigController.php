@@ -20,7 +20,7 @@ class WebsiteConfigController extends Controller
 
     public function update(Request $request)
     {
-        $input = $request->all();
+        $input['primary']['pamlet_primary'] = getConfig('primary')->pamflet_primary ?? null;
         if ($request->pamflet_primary) {
 			$pamflet_primary = $request->file('pamflet_primary');
             $input['primary']['pamflet_primary'] = md5(time()) . '_' . $pamflet_primary->getClientOriginalName();
@@ -28,8 +28,12 @@ class WebsiteConfigController extends Controller
                 unlink(public_path('storage/pamflet/' .getConfig('primary')->pamflet_primary));
             }
             $pamflet_primary->move(public_path('storage/pamflet/'), $input['primary']['pamflet_primary']);
-		}
+		} else {
+            $input['primary']['pamflet_primary'] = getConfig('primary')->pamflet_primary ?? null;
+        }
+        
 
+        $input['primary']['started_at'] = parseCarbon($request->started_at)->format('Y-m-d H:i:s');
         WebsiteConfig::updateOrCreate(['key' => 'primary'], ['value' => $input['primary']]);
 
         return response()->json([

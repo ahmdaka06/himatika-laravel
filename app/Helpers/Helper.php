@@ -164,6 +164,7 @@ endif;
 
 if (!function_exists('parseCarbon')):
     function parseCarbon($date = ''){
+        \Carbon\Carbon::setLocale('id');
         return \Carbon\Carbon::parse($date);
     }
 endif;

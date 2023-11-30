@@ -49,10 +49,9 @@ class ParticipantController extends Controller
         $validators = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:participants,email,' . $participant->id,
-            'sid_number' => 'required|numeric',
             'institutional_origin' => 'required|in:' . arrayToString(config('constants.universities'), 'id'),
             'institutional_name' => request()->institutional_origin == '2' ? 'required' : 'nullable',
-            'whatsapp' => 'required',
+            'whatsapp' => 'required|phone_number',
             'payment' => 'required|in:' . arrayToString(config('constants.payments'), 'name'),
             'pay_sender' => 'required',
             'pay_proof' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5000',
@@ -61,10 +60,12 @@ class ParticipantController extends Controller
             'status' => 'required|in:' . arrayToString(config('constants.statuses'), 'key'),
             'reason' =>  (in_array($request->status, ['rejected', 'failed'])) ? 'required' : 'nullable',
             'certificate' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5000',
-        ], [], [
+            'attend' => 'required|in:1,2',
+        ],  [
+            'whatsapp.phone_number' => 'Harus diawali dengan 628',
+        ], [
             'name' => 'Nama',
             'email' => 'Email',
-            'sid_number' => 'NIM',
             'institutional_origin' => 'Asal Institusi',
             'institutional_name' => 'Nama Institusi',
             'whatsapp' => 'Whatsapp',
@@ -76,6 +77,7 @@ class ParticipantController extends Controller
             'status' => 'Status',
             'reason' => 'Alasan',
             'certificate' => 'Sertifikat',
+            'attend' => 'Kehadiran',
         ]);
 
         if ($validators->fails()) {
@@ -96,6 +98,7 @@ class ParticipantController extends Controller
             // 'payment' => $request->payment,
             'pay_sender' => $request->pay_sender,
             'recom_by' => $request->recom_by,
+            'attend' => $request->attend,
         ];
 
 
@@ -127,11 +130,7 @@ class ParticipantController extends Controller
         $input['payment'] = $payment;
 
 
-        if ($request->institutional_origin == '071023') {
-            $input['price'] = 10000;
-        } else {
-            $input['price'] = 15000;
-        }
+        $input['price'] = 15000;
 
         $input['is_paid'] = $request->is_paid == '1' ? true : false;
         $input['status'] = $request->status;

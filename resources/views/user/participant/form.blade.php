@@ -42,19 +42,7 @@
                             <small class="text-danger name-invalid"></small>
                         </div>
                         <div class="form-group col-md-12 my-1">
-                            <label for="">NIM <em class="text-danger ms-2"> *harus sesuai dengan KTM</em></label>
-                            <input type="text" class="form-control" name="sid_number" id="sid_number" value="{{ $participant->sid_number ?? old('sid_number') }}" placeholder="Nomor induk mahasiswa">
-                            <small class="text-danger sid_number-invalid"></small>
-                        </div>
-                        {{-- <div class="form-group col-md-12 my-1">
-                            <label for="">Asal Institusi </label>
-                            <input type="text" class="form-control" name="institutional_origin" id="institutional_origin" value="{{ old('institutional_origin') }}" placeholder="Asal Institusi">
-                            <small class="text-danger institutional_origin-invalid"></small>
-                        </div> --}}
-                        <div class="form-group col-md-12 my-1">
                             <label for="">Asal Institusi / Universitas </label>
-                            {{-- <select name="institutional_origin" id="institutional_origin" class="form-select select2"></select> --}}
-                            {{-- <input type="text" class="form-control" name="institutional_origin" id="institutional_origin" value="{{ old('institutional_origin') }}" placeholder="Asal Institusi"> --}}
                             <select class="form-select" name="institutional_origin" id="institutional_origin">
                                 <option value="">Pilih salah satu</option>
                                 @foreach (config('constants.universities') as $key => $value)
@@ -81,7 +69,6 @@
                                     <option value="{{ $value['name'] }}" @if (isset($participant->payment['name']) AND $participant->payment['name'] == $value['name']) selected @endif>{{  $value['name'] . ' ' . $value['account'] . ' - ' . $value['holder'] . ' - ' . ($value['is_manual'] == true ? 'Konfirmasi Manual' : 'Otomatis') }}</option>
                                 @endforeach
                             </select>
-                            {{-- <input type="text" class="form-control" name="pay_sender" id="pay_sender" value="{{ old('pay_sender') }}" placeholder="Contoh: BRI 3171xxx, DANA 081xxx"> --}}
                             <small class="text-danger payment-invalid"></small>
                         </div>
                         <div class="form-group col-md-12 my-1">
@@ -113,8 +100,19 @@
                             <small class="text-danger recom_by-invalid"></small>
                         </div>
                         <div class="form-group col-md-12 my-1">
+                            <label for="">Mengikuti Secara ?</label>
+                            <select class="form-select" name="attend" id="attend">
+                                <option value="">Pilih salah satu</option>
+                                @foreach (config('constants.attendances.types') as $key => $value)
+                                    <option value="{{ $key }}"  @if($participant->attend == $key) selected @endif>{{  $value }}</option>
+                                @endforeach
+                            </select>
+                            {{-- <input type="text" class="form-control" name="pay_sender" id="pay_sender" value="{{ old('pay_sender') }}" placeholder="Contoh: BRI 3171xxx, DANA 081xxx"> --}}
+                            <small class="text-danger attend-invalid"></small>
+                        </div>
+                        <div class="form-group col-md-12 my-1">
                             <label for="">Harga </label>
-                            <input type="number" class="form-control" value="{{ $participant->price ?? '10000' }}" name="price" readonly>
+                            <input type="number" class="form-control" value="{{ $participant->price ?? '15000' }}" name="price" readonly>
                             <small class="text-danger price-invalid"></small>
                         </div>
                         <div class="form-group col-md-12 my-1">
@@ -186,6 +184,26 @@
                 $('input[name=price]').val('10000');
             }
         });
+        $('select[name="is_paid"]').change(function (e) {
+            e.preventDefault();
+            var is_paid = $('select[name="is_paid"] option:selected').val();
+            if (is_paid == '1') {
+                $('select[name="status"]').val('approved').change();
+            } else {
+                $('select[name="status"]').val('pending').change();
+
+            }
+        });
+        // $('select[name="status"]').change(function (e) {
+        //     e.preventDefault();
+        //     var status = $('select[name="status"] option:selected').val();
+        //     if (status == 'approved' || status == 'success') {
+        //         $('select[name="is_paid"]').val('1').change();
+        //     } else {
+        //         $('select[name="is_paid"]').val('0').change();
+
+        //     }
+        // });
         $('.select2').select2({
             placeholder: 'Pilih Institusi',
             minimumInputLength: 2,

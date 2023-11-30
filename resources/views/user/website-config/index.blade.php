@@ -23,11 +23,20 @@
                     <div class="row">
                         <div class="form-group">
                             <label for="name">Pamflet Utama</label>
-                            <input type="file" class="dropify" name="pamflet_primary" id="pamflet_primary" value="{{ ((isset(getConfig('primary')->pamflet_primary) AND getConfig('primary')->pamflet_primary <> '') ? url('storage/pamflet/'. getConfig('primary')->pamflet_primary) : null) }}" placeholder="Bukti Pembayaran"
-                                data-default-file="{{ ((isset(getConfig('primary')->pamflet_primary) AND getConfig('primary')->pamflet_primary <> '') ? url('storage/pamflet/'. getConfig('primary')->pamflet_primary) : 'kontok') }}"
+                            <input 
+                                type="file" 
+                                class="dropify"
+                                name="pamflet_primary" 
+                                id="pamflet_primary" 
+                                value="{{ ((isset(getConfig('primary')->pamflet_primary) AND getConfig('primary')->pamflet_primary <> '') ? url('storage/pamflet/'. getConfig('primary')->pamflet_primary) : null) }}" placeholder="Bukti Pembayaran"
+                                data-default-file="{{ ((isset(getConfig('primary')->pamflet_primary) AND getConfig('primary')->pamflet_primary <> '') ? url('storage/pamflet/'. getConfig('primary')->pamflet_primary) : '...') }}"
                                 value="{{ ((isset(getConfig('primary')->pamflet_primary) AND getConfig('primary')->pamflet_primary <> '') ? url('storage/pamflet/'. getConfig('primary')->pamflet_primary) : null) }}"
                             >
                             <small class="text-danger pamflet_primary-invalid"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="started_at">Pendaftaran Di Buka</label>
+                            <input type="datetime-local" class="form-control" name="started_at" id="started_at" value="{{ parseCarbon(getConfig('primary')->started_at ?? '') }}">
                         </div>
                         <div class="form group col-md-12 d-flex justify-content-center my-3">
                             <button type="submit" class="btn btn-primary"><i class="mdi mdi-check mx-2"></i> Submit</button>
