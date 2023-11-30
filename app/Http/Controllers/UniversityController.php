@@ -48,6 +48,6 @@ class UniversityController extends Controller
     protected function getUniv(string $string)
     {
         $explode = explode(',', $string);
-        return trim($explode[0]);
+        return str_replace('NAMA PT : ', '', trim($explode[0]));
     }
 }

@@ -13,7 +13,15 @@
                     <table class="table mb-4">
                         <tr>
                             <th class="ps-0 pb-0 border-0">Nomor Faktur</th>
-                            <td class="ps-0 pb-0 border-0 text-end">{{ $invoice->invoice }} <i class="mdi mdi-copy ms-1"  onclick="salin('PI20231125602947', 'Order ID berhasil disalin');"></i></td>
+                            <td class="ps-0 pb-0 border-0 text-end">{{ $invoice->invoice }}
+                                <i
+                                    class="mdi mdi-file-multiple ms-1"
+                                    data-bs-toggle="tooltip"
+                                    data-placement="top"
+                                    title="Salin"
+                                    onclick="copy('{{ $invoice->invoice }}', 'No. faktur berhasil disalin');">
+                                </i>
+                            </td>
                         </tr>
                         <tr>
                             <th class="ps-0 pb-0 border-0">Tanggal</th>
@@ -45,7 +53,16 @@
                         </tr>
                         <tr>
                             <th class="ps-0 pb-0 border-0">Total Pembayaran</th>
-                            <td class="ps-0 pb-0 border-0 text-end fw-bold">Rp {{ currency($invoice->price) }}</td>
+                            <td class="ps-0 pb-0 border-0 text-end fw-bold text-primary">
+                                Rp {{ currency($invoice->price) }}
+                                <i
+                                    class="mdi mdi-file-multiple ms-1"
+                                    data-bs-toggle="tooltip"
+                                    data-placement="top"
+                                    title="Salin"
+                                    onclick="copy('{{ $invoice->invoice }}', 'Nominal berhasil disalin');">
+                                </i>
+                            </td>
                         </tr>
                     </table>
                     <div class="my-3">
@@ -62,7 +79,16 @@
                         <p class="mb-0">Silahkan melakukan transfer ke rekening dibawah ini</p>
                         <ul>
                             <li>Pembayaran : {{ $invoice->payment['name'] }} </li>
-                            <li>No. Rekening : {{ $invoice->payment['account'] }} </li>
+                            <li>
+                                No. Rekening : {{ $invoice->payment['account'] }}
+                                <i
+                                    class="mdi mdi-file-multiple ms-1"
+                                    data-bs-toggle="tooltip"
+                                    data-placement="top"
+                                    title="Salin"
+                                    onclick="copy('{{ $invoice->invoice }}', 'No. Rekening berhasil disalin');">
+                                </i>
+                            </li>
                             <li>Atas Nama : {{ $invoice->payment['holder'] }} </li>
                         </ul>
                     </div>
@@ -111,3 +137,14 @@
         </div>
     </div>
 </div>
+@push('scripts')
+<script>
+    function copy(text, label_text) {
+        navigator.clipboard.writeText(text);
+        Swal.fire({
+            icon: 'success',
+            title: label_text,
+        });
+    }
+</script>
+@endpush

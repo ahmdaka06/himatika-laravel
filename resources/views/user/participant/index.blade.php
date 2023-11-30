@@ -65,16 +65,13 @@
                                     <a href="{{ route('user.participant.formGET', $participant->id) }}" class="badge bg-warning badge-md" data-bs-toggle="tooltip" data-placement="top" title="Edit">
                                         <i class="bx bx-pencil"></i>
                                     </a>
-                                <a href="javascript:;" onclick="modal('detail', '#{{ $participant->id }}', '{{ route('user.participant.detail', $participant->id) }}?action=pay_proof')" class="badge bg-primary badge-md" data-bs-toggle="tooltip" data-placement="top" title="Lihat Bukti Pembayaran">
+                                    <a href="javascript:;" onclick="modal('detail', '#{{ $participant->id }}', '{{ route('user.participant.detail', $participant->id) }}?action=pay_proof')" class="badge bg-primary badge-md" data-bs-toggle="tooltip" data-placement="top" title="Lihat Bukti Pembayaran">
                                         <i class="bx bx-file"></i>
                                     </a>
 
                                     <a href="javascript:;" onclick="modal('detail', '#{{ $participant->id }}', '{{ route('user.participant.detail', $participant->id) }}?action=certificate')" class="badge bg-success badge-md" data-bs-toggle="tooltip" data-placement="top" title="Lihat Serfitikat">
                                         <i class="bx bx-credit-card"></i>
                                     </a>
-
-
-
                                 </td>
                             </tr>
                             @empty

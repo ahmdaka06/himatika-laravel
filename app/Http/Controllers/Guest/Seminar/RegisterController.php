@@ -15,7 +15,8 @@ class RegisterController extends Controller
     public function index() {
         if (request()->ajax() AND request()->isMethod('get') AND request()->__m == '__searchInstitutional') {
             return [
-
+                ['id' => '071023', 'text' => '071023 - Universitas Darul Ulum Jombang'],
+                ['id' => '2', 'text' => '2 - Lainnya'],
             ];
         }
         $components = [
@@ -31,15 +32,17 @@ class RegisterController extends Controller
         $validators = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
-            'sid_number' => 'required|numeric',
+            // 'sid_number' => 'required|numeric',
             'institutional_origin' => 'required',
             'institutional_name' => request()->institutional_origin == '2' ? 'required' : 'nullable',
-            'whatsapp' => 'required',
+            'whatsapp' => 'required|phone_number',
             'payment' => 'required|in:' . arrayToString(config('constants.payments'), 'name'),
             'pay_sender' => 'required',
             'pay_proof' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5000',
             'recom_by' => 'nullable',
-        ], [], [
+        ], [
+            'whatsapp.phone_number' => 'Harus diawali dengan 62',
+        ], [
             'name' => 'Nama',
             'email' => 'Email',
             'sid_number' => 'NIM',
@@ -101,20 +104,16 @@ class RegisterController extends Controller
             $input['payment'] = $payment;
 
 
-            if ($request->institutional_origin == '071023') {
-                $input['price'] = 10000;
-            } else {
-                $input['price'] = 15000;
-            }
+            $input['price'] = 15000; // set price
 
             $invoice = Participant::create($input);
-            Mail::send('mail.guest.seminar', $invoice->toArray(), function ($message) use ($input) {
-                $message
-                    ->to($input['email'], $input['name'])
-                    ->from(config('mail.from.address'), 'HIMATIKA Universitas Darul Ulum')
-                    ->subject('Pendaftaran Seminar No. Faktur ' . $input['invoice']);
-                });
 
+            // Mail::send('mail.guest.seminar', $invoice->toArray(), function ($message) use ($input) {
+            //     $message
+            //         ->to($input['email'], $input['name'])
+            //         ->from(config('mail.from.address'), 'HIMATIKA Universitas Darul Ulum')
+            //         ->subject('Pendaftaran Seminar No. Faktur ' . $input['invoice']);
+            //     });
 
             DB::commit();
             return response()->json([
@@ -189,6 +188,14 @@ class RegisterController extends Controller
                 'status'  => false,
                 'type'    => 'validation',
                 'msg' => $validators->errors()->toArray()
+            ]);
+        }
+
+        if ($participant->pay_proof != null) {
+           return response()->json([
+                'status' => false,
+                'type' => 'alert',
+                'msg' => 'Bukti pembayaran sudah di upload !.'
             ]);
         }
 

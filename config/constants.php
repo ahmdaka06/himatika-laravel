@@ -1,9 +1,10 @@
 <?php
 return [
     'payments' => [
-        ['name' => 'DANA TRANSFER', 'account' => '085335837454', 'holder' => 'DANANG SETIADI', 'is_manual' => true],
-        ['name' => 'BRI TRANSFER', 'account' => '058501007589534', 'holder' => 'DANANG SETIADI', 'is_manual' => true],
-        ['name' => 'SHOPEEPAY TRANSFER', 'account' => '087773201852', 'holder' => 'WAHYU FIKRI ZP', 'is_manual' => true],
+        ['name' => 'DANA TRANSFER', 'account' => '082234407575', 'holder' => 'RESKI DINI NOVARIYANTI', 'is_manual' => true],
+        ['name' => 'BRI TRANSFER', 'account' => '036001061800506', 'holder' => 'RESKI DINI NOVARIYANTI', 'is_manual' => true],
+        ['name' => 'SHOPEEPAY TRANSFER', 'account' => '082234407575', 'holder' => 'RESKI DINI NOVARIYANTI', 'is_manual' => true],
+        ['name' => 'OVO TRANSFER', 'account' => '082234407575', 'holder' => 'RESKI DINI NOVARIYANTI', 'is_manual' => true],
     ],
     'users' => [
         'roles' => ['admin', 'member']

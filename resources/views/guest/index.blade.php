@@ -46,12 +46,35 @@
                 <h5 class="mt-2">Sponsor</h5>
             </div>
         </div>
+<style>
+    img.sponsor {
+        height: 250px;
+        width: 250px;
+    }
+    @media (max-width: 768px) {
+        img.sponsor {
+            height: 150px;
+            width: 150px;
+        }
+    }
+    @media (max-width: 576px) {
+        img.sponsor {
+            height: 100px;
+            width: 100px;
+        }
+    }
+</style>
         <div class="row justify-content-center">
-            <div class="col-md-4">
-                <img src="{{ url('storage/logo/logo-vip.png') }}" height="250px" width="250px" alt="">
+            <div class="col-md-3 col-4">
+                <a href="https://vip-reseller.co.id">
+                    <img class="sponsor" src="{{ url('storage/logo/logo-vip.png') }}" alt="VIP Reseller - Website Top Up Game">
+                </a>
             </div>
-            <div class="col-md-4">
-                <img src="{{ url('storage/logo/logo-dolanankode.png') }}" height="250px" width="250px" alt="">
+            <div  class="col-md-3 col-4">
+                <a href="https://dolanankode.web.id">
+                    <img class="sponsor" src="{{ url('storage/logo/logo-dolanankode.png') }}" alt="DolananKode - Jasa Pembuatan Website">
+                </a>
+
             </div>
         </div>
     </div>

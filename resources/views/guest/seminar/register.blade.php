@@ -36,11 +36,6 @@
                             <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" placeholder="Nama lengkap">
                             <small class="text-danger name-invalid"></small>
                         </div>
-                        <div class="form-group col-md-12 my-1">
-                            <label for="">NIM <em class="text-danger ms-2"> *harus sesuai dengan KTM</em></label>
-                            <input type="text" class="form-control" name="sid_number" id="sid_number" value="{{ old('sid_number') }}" placeholder="Nomor induk mahasiswa">
-                            <small class="text-danger sid_number-invalid"></small>
-                        </div>
                         {{-- <div class="form-group col-md-12 my-1">
                             <label for="">Asal Institusi </label>
                             <input type="text" class="form-control" name="institutional_origin" id="institutional_origin" value="{{ old('institutional_origin') }}" placeholder="Asal Institusi">
