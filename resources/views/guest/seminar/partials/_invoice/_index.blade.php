@@ -2,20 +2,30 @@
     <div class="col-md-8 mb-3">
         <div class="card">
             <div class="card-header">
-                <h5 class="strip card-title">Detail Peserta</h5>
+                <h5 class="strip card-title">Detail Faktur {{ $invoice->invoice }}</h5>
             </div>
             <div class="card-body">
                 <!-- <div class="alert alert-primary text-center">
                     <b class="d-block">Harap segera melakukan pembayaran sebelum</b>
                     <h6 class="mb-0 fw-700 text-danger">26 Nov 2023 2:57:02</h6>
                 </div> -->
+                <div class="">
+                    <h6 class="fw-700 mb-3 ">*CATATAN : HARAP SIMPAN QRCODE DI BAWAH INI UNTUK VALIDASI DI TEMPAT ACARA (BISA DI SCREENSHOT) </h6>
+                    <div class="d-flex justify-content-center">
+                        <img src="{{ qrImage(route('guest.seminar.invoiceGET', $invoice->invoice), 250) }}" alt="" class="d-flex justify-content-center">
+                    </div>
+                    <p class="d-flex justify-content-center my-2">
+                        <a href="{{ qrImage(route('guest.seminar.invoiceGET', $invoice->invoice)) }}" class="btn btn-primary d-none-print" target="_blank"> Download</a>
+                    </p>
+                </div>
+                <hr>
                 <div class="table-responsive">
                     <table class="table mb-4">
                         <tr>
                             <th class="ps-0 pb-0 border-0">Nomor Faktur</th>
                             <td class="ps-0 pb-0 border-0 text-end">{{ $invoice->invoice }}
                                 <i
-                                    class="mdi mdi-file-multiple ms-1"
+                                    class="mdi mdi-file-multiple ms-1 d-none-print"
                                     data-bs-toggle="tooltip"
                                     data-placement="top"
                                     title="Salin"
@@ -48,7 +58,7 @@
                             <td class="ps-0 pb-0 border-0 text-end">{{ $invoice->pay_sender }}</td>
                         </tr>
                         <tr>
-                            <th class="ps-0 pb-0 border-0">Status Keterangan</th>
+                            <th class="ps-0 pb-0 border-0">Status</th>
                             <td class="ps-0 pb-0 border-0 text-end">{!! badgeStatus($invoice->status) !!}</td>
                         </tr>
                         <tr>
@@ -56,7 +66,7 @@
                             <td class="ps-0 pb-0 border-0 text-end fw-bold text-primary">
                                 Rp {{ currency($invoice->price) }}
                                 <i
-                                    class="mdi mdi-file-multiple ms-1"
+                                    class="mdi mdi-file-multiple ms-1  d-none-print"
                                     data-bs-toggle="tooltip"
                                     data-placement="top"
                                     title="Salin"
@@ -65,15 +75,6 @@
                             </td>
                         </tr>
                     </table>
-                    <div class="my-3">
-                        <h6 class="fw-700 mb-3 ">*CATATAN : HARAP SIMPAN QRCODE DI BAWAH INI UNTUK VALIDASI DI TEMPAT ACARA (BISA DI SCREENSHOT) </h6>
-                        <div class="d-flex justify-content-center">
-                            <img src="{{ qrImage(route('guest.seminar.invoiceGET', $invoice->invoice), 250) }}" alt="" class="d-flex justify-content-center">
-                        </div>
-                        <p class="d-flex justify-content-center my-2">
-                            <a href="{{ qrImage(route('guest.seminar.invoiceGET', $invoice->invoice)) }}" class="btn btn-primary d-none-print" target="_blank"> Download</a>
-                        </p>
-                    </div>
                     <div class="mb-3  d-none-print">
                         <h6 class="fw-700 mb-1">Cara Pembayaran : </h6>
                         <p class="mb-0">Silahkan melakukan transfer ke rekening dibawah ini</p>

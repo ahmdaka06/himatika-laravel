@@ -20,10 +20,6 @@
 			</td>
 		</tr>
         <tr>
-            <th width="50%">NIM</th>
-            <td>{{ $participant->sid_number }}</td>
-        </tr>
-        <tr>
             <th width="50%">Nama Lengkap</th>
             <td>{{ $participant->name }}</td>
         </tr>
@@ -75,6 +71,10 @@
 				<strong>Lainnya</strong>
 			</td>
 		</tr>
+        <tr>
+            <th width="50%">Hadir Secara</th>
+            <td>{{ $participant->attend == '1' ? 'Offline' : 'Online' }}</td>
+        </tr>
         <tr>
             <th width="50%">Sertifikat</th>
             <td>

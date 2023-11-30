@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="form-group col-md-12 my-1">
                             <label for="">Nomor Faktur</label>
-                            <input type="text" class="form-control" name="invoice" id="invoice" placeholder="#INV-3243902" value="{{ request()->segment(3) ?? old('invoice') }}">
+                            <input type="text" class="form-control" name="invoice" id="invoice" placeholder="INV-3243902" value="{{ request()->segment(3) ?? old('invoice') }}">
                             <small class="text-danger invoice-invalid"></small>
                         </div>
                         <div class="form group col-md-12 d-flex justify-content-center my-3">

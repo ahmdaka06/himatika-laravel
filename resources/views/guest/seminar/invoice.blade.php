@@ -24,6 +24,22 @@
     }
 
     @media print {
+        .text-primary {
+            color: #000 !important;
+        }
+        .btn {
+            background-color: #FFF !important;
+            color: #000 !important;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0 !important
+            margin: 0 !important;
+            /* display: inline-flex; */
+            align-items: right !important;
+            justify-content: right !important;
+            text-align: right !important;
+            vertical-align: right !important;
+        }
         body {
             padding: 0;
             margin: 0;
@@ -34,7 +50,7 @@
         }
 
         * {
-            color: #333 !important;
+            color: #000 !important;
         }
 
         .card-print {
