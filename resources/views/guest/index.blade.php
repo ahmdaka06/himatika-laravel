@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-md-4 col-lg-4 mb-3">
         <div class="card">
-            <img class="card-img-top" src="{{ ((isset(getConfig('primary')->pamflet_primary) AND getConfig('primary')->pamflet_primary <> '') ? url('storage/pamflet/'. getConfig('primary')->pamflet_primary) : null) }}" alt="Pamflet Seminar Himatika" />
+            <img class="card-img-top" loading="lazy" src="{{ ((isset(getConfig('primary')->pamflet_primary) AND getConfig('primary')->pamflet_primary <> '') ? url('storage/pamflet/'. getConfig('primary')->pamflet_primary) : null) }}" alt="Pamflet Seminar Himatika" />
             <div class="card-body">
                 <div class="text-center">
                     <h5>Mau daftar jadi peserta seminar ??</h5>
@@ -67,12 +67,12 @@
         <div class="row justify-content-center">
             <div class="col-md-3 col-4">
                 <a href="https://vip-reseller.co.id">
-                    <img class="sponsor" src="{{ url('storage/logo/logo-vip.png') }}" alt="VIP Reseller - Website Top Up Game">
+                    <img class="sponsor" loading="lazy" src="{{ url('storage/logo/logo-vip.png') }}" alt="VIP Reseller - Website Top Up Game">
                 </a>
             </div>
             <div  class="col-md-3 col-4">
                 <a href="https://dolanankode.web.id">
-                    <img class="sponsor" src="{{ url('storage/logo/logo-dolanankode.png') }}" alt="DolananKode - Jasa Pembuatan Website">
+                    <img class="sponsor" loading="lazy" src="{{ url('storage/logo/logo-dolanankode.png') }}" alt="DolananKode - Jasa Pembuatan Website">
                 </a>
 
             </div>

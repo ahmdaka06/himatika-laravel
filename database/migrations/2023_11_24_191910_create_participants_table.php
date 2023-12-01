@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('invoice', 50);
             $table->string('name', 50);
             $table->string('email', 50)->unique();
-            $table->string('sid_number', 50);
+            $table->integer('sid_number');
             $table->json('institutional_origin')->nullable();
             $table->string('whatsapp', 30);
             $table->json('payment')->nullable();

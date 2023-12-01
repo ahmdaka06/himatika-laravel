@@ -17,7 +17,7 @@ if (!function_exists('badgeStatus')):
             case 'success':
                 return "<button class=\"btn btn-success font-weight-bold text-white\">Sukses</button>";
                 break;
-            case 'aproved':
+            case 'approved':
                 return "<button class=\"btn btn-success font-weight-bold text-white\">Pembayaran Diterima</button>";
                 break;
             default:

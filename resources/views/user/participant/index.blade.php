@@ -40,6 +40,7 @@
                                 <th>Institusi</th>
                                 <th>Rekomendasi dari</th>
                                 <th>Waktu Pendaftaran</th>
+                                <th>Status</th>
                                 <th>Update Terakhir</th>
                                 <th>Aksi</th>
                             </tr>
@@ -57,6 +58,7 @@
                                 <td>{{ $participant->institutional_origin['name'] }}</td>
                                 <td>{{ $participant->recom_by }}</td>
                                 <td>{{ format_datetime($participant->created_at) }}</td>
+                                <td>{!! badgeStatus($participant->status) !!}</td>
                                 <td>{{ format_datetime($participant->updated_at) }} | {{ $participant->user->name ?? '-' }}</td>
                                 <td>
                                     <a href="javascript:;" onclick="modal('detail', '#{{ $participant->id }}', '{{ route('user.participant.detail', $participant->id) }}')" class="badge bg-info badge-md" data-bs-toggle="tooltip" data-placement="top" title="Detail">
