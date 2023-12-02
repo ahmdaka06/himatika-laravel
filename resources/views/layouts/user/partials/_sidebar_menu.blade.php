@@ -18,14 +18,14 @@
     <li class="menu-header small text-uppercase"><span class="menu-header-text">Berita</span></li>
     <li class="menu-item {{ request()->is('dashboard/news') || request()->is('dashboard/news/*') ? 'active' : '' }}">
         <a href="{{ route('user.news.index') }}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-user"></i>
+            <i class="menu-icon tf-icons bx bx-news"></i>
             <div data-i18n="Basic">Berita</div>
         </a>
     </li>
     <li class="menu-header small text-uppercase"><span class="menu-header-text">Pengaturan Website</span></li>
     <li class="menu-item {{ request()->is('dashboard/website-config') || request()->is('dashboard/website-config/*') ? 'active' : '' }}">
         <a href="{{ route('user.website-config.indexGET') }}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-user"></i>
+            <i class="menu-icon tf-icons bx bx-cog"></i>
             <div data-i18n="Basic">Pengaturan Website</div>
         </a>
     </li>

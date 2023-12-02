@@ -84,8 +84,10 @@ if (!function_exists('list_date_range')):
     function list_date_range(String $start, String $end, String $format = 'Y-m-d'): Array {
         $start = \Carbon\Carbon::parse($start);
         $end = \Carbon\Carbon::parse($end);
+
         $end = new DateTime($end);
         $end = $end->add(new DateInterval('P1D'))->format('Y-m-d');
+
 
         $period = new DatePeriod(
             new DateTime($start),
