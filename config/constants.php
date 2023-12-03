@@ -5,6 +5,7 @@ return [
         ['name' => 'BRI TRANSFER', 'account' => '036001061800506', 'holder' => 'RESKI DINI NOVARIYANTI', 'is_manual' => true],
         ['name' => 'SHOPEEPAY TRANSFER', 'account' => '082234407575', 'holder' => 'RESKIDINIAR', 'is_manual' => true],
         ['name' => 'OVO TRANSFER', 'account' => '082234407575', 'holder' => 'RESKIDINI', 'is_manual' => true],
+        // ['name' => 'OFFLINE / COD UNDAR', 'account' => 'KONTAK KAMI', 'holder' => 'RESKIDINI', 'is_manual' => true],
     ],
     'users' => [
         'roles' => ['admin', 'member']
