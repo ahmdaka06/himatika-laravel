@@ -3,6 +3,7 @@
 use App\Http\Controllers\Guest\Seminar\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UniversityController;
+use App\Http\Controllers\VideoGameController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,3 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [HomeController::class, 'index'])->withoutMiddleware(['auth']);
-
-
-

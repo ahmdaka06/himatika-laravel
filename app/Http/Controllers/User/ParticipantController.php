@@ -173,4 +173,24 @@ class ParticipantController extends Controller
 
         return view('user.participant.detail', $components);
     }
+
+    public function mostRecommendations()
+    {
+        $participants = Participant::query()
+            ->selectRaw('count(*) as total, recom_by')
+            ->groupBy('recom_by')
+            ->orderBy('total', 'desc')
+            ->limit(10)
+            ->get();
+        $components = [
+            'page' => [
+                'title' => 'Peserta Terbanyak Rekomendasi',
+                'subtitle' => 'Peserta Terbanyak Rekomendasi'
+            ],
+            'participants' => [
+                'data' => $participants,
+            ]
+        ];
+        return view('user.participant.most-recommendations', $components);
+    }
 }

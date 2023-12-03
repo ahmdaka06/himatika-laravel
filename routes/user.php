@@ -23,6 +23,7 @@ Route::group(['namespace' => 'User', 'middleware' => ['auth']], function() {
             Route::get('/form/{participant:id?}', [ParticipantController::class, 'formGET'])->name('user.participant.formGET');
             Route::post('/form/{participant:id?}', [ParticipantController::class, 'formPOST'])->name('user.participant.formPOST');
             Route::get('/detail/{participant:id}', [ParticipantController::class, 'detail'])->name('user.participant.detail');
+            Route::get('/most-recommendation', [ParticipantController::class, 'mostRecommendations'])->name('user.participant.mostRecommendations');
         });
 
         Route::prefix('news')->group(function () {
