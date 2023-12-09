@@ -11,7 +11,11 @@
 @endsection
 @section('content')
 <div class="row justify-content-center">
-    @if (now()->isAfter(parseCarbon(getConfig('primary')->started_at)))
+    @if (now()->isAfter(parseCarbon('2023-12-10')))
+    <div class="col-md-12">
+        <h5 class="text-center"> Registrasi peserta sudah di tutup</h5>
+    </div>
+    @elseif (now()->isAfter(parseCarbon(getConfig('primary')->started_at)))
     <div class="col-md-8 mb-4">
         <div class="card mb-4">
             <div class="card-header bg-primary py-3">
@@ -134,8 +138,6 @@
             <H1 class="text-center mt-5" id="demo"></H1>
         </div>
     @endif
-
-
 </div>
 
 @push('scripts')
