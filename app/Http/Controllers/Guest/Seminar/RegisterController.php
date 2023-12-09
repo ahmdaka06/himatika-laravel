@@ -107,7 +107,11 @@ class RegisterController extends Controller
             $input['payment'] = $payment;
 
 
-            $input['price'] = 15000; // set price
+            if ($input['recom_by'] == 'SEMINARHIMATIKA23') {
+                $input['price'] = 10000;
+            } else {
+                $input['price'] = 15000;
+            }
 
             $invoice = Participant::create($input);
 

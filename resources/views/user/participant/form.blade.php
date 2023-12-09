@@ -112,7 +112,7 @@
                         </div>
                         <div class="form-group col-md-12 my-1">
                             <label for="">Harga </label>
-                            <input type="number" class="form-control" value="{{ $participant->price ?? '15000' }}" name="price" readonly>
+                            <input type="number" class="form-control" value="{{ $participant->price ?? '15000' }}" name="price">
                             <small class="text-danger price-invalid"></small>
                         </div>
                         <div class="form-group col-md-12 my-1">

@@ -111,9 +111,9 @@ class ParticipantController extends Controller
         if ($request->pay_proof) {
             $pay_proof = $request->file('pay_proof');
             $input['pay_proof'] = md5(time()) . '_' . $pay_proof->getClientOriginalName();
-            if ($participant->id AND file_exists(public_path('storage/seminar/pay_proof/' . $participant->pay_proof))) {
-                unlink(public_path('storage/seminar/pay_proof/' . $participant->pay_proof));
-            }
+            // if ($participant->id AND file_exists(public_path('storage/seminar/pay_proof/' . $participant->pay_proof))) {
+            //     unlink(public_path('storage/seminar/pay_proof/' . $participant->pay_proof));
+            // }
             $pay_proof->move(public_path('storage/seminar/pay_proof'), $input['pay_proof']);
         }
 
@@ -130,7 +130,11 @@ class ParticipantController extends Controller
         $input['payment'] = $payment;
 
 
-        $input['price'] = 15000;
+        if ($input['recom_by'] == 'SEMINARHIMATIKA23') {
+            $input['price'] = 10000;
+        } else {
+            $input['price'] = 15000;
+        }
 
         $input['is_paid'] = $request->is_paid == '1' ? true : false;
         $input['status'] = $request->status;
@@ -140,9 +144,9 @@ class ParticipantController extends Controller
         if ($request->certificate) {
             $certificate = $request->file('certificate');
             $input['certificate'] = md5(time()) . '_' . $certificate->getClientOriginalName();
-            if ($participant->id AND file_exists(public_path('storage/seminar/sertif/' . $participant->certificate))) {
-                unlink(public_path('storage/seminar/sertif/' . $participant->certificate));
-            }
+            // if ($participant->id AND file_exists(public_path('storage/seminar/sertif/' . $participant->certificate))) {
+            //     unlink(public_path('storage/seminar/sertif/' . $participant->certificate));
+            // }
             $certificate->move(public_path('storage/seminar/certificate'), $input['certificate']);
         }
 

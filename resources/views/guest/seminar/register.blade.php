@@ -69,6 +69,7 @@
                             <select class="form-select" name="payment" id="payment">
                                 <option value="">Pilih salah satu</option>
                                 @foreach (config('constants.payments') as $key => $value)
+
                                     <option value="{{ $value['name'] }}">{{  $value['name'] . ' ' . $value['account'] . ' - ' . $value['holder'] . ' - ' . ($value['is_manual'] == true ? 'Konfirmasi Manual' : 'Otomatis') }}</option>
                                 @endforeach
                             </select>
@@ -110,6 +111,9 @@
                             <select class="form-select" name="attend" id="attend">
                                 <option value="">Pilih salah satu</option>
                                 @foreach (config('constants.attendances.types') as $key => $value)
+                                    @if ($key == 'offline')
+                                        @continue
+                                    @endif
                                     <option value="{{ $key }}">{{  $value }}</option>
                                 @endforeach
                             </select>
@@ -130,7 +134,7 @@
             <H1 class="text-center mt-5" id="demo"></H1>
         </div>
     @endif
-    
+
 
 </div>
 
@@ -166,7 +170,7 @@
         document.getElementById("demo").innerHTML = days + "d " + hours + "h " +
             minutes + "m " + seconds + "s ";
 
-        // If the count down is over, write some text 
+        // If the count down is over, write some text
         if (distance < 0) {
             clearInterval(x);
             document.getElementById("demo").innerHTML = "REGISTRASI PESERTA SUDAH DI BUKA !!";
