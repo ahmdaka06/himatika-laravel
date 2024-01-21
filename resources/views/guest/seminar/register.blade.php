@@ -11,7 +11,7 @@
 @endsection
 @section('content')
 <div class="row justify-content-center">
-    @if (now()->isAfter(parseCarbon('2023-12-10')))
+    @if (now()->isAfter(parseCarbon('2024-12-12')))
     <div class="col-md-12">
         <h5 class="text-center"> Registrasi peserta sudah di tutup</h5>
     </div>
